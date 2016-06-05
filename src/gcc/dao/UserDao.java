@@ -83,14 +83,14 @@ public class UserDao
 
 	public boolean AddBaseUser(UserBean user)
 	{
-		final String sql = "insert into Users (UserID,Account,Password,IdentityPic) values(?,?,?,?)";
+		final String sql = "insert into Users (UserID,Account,Password,HeadImgUrl) values(?,?,?,?)";
 		try (PreparedStatement ps1 = conn.prepareStatement(sql))
 		{
 			String UserID = UUID.randomUUID().toString();//长度为36位的字符串
 			ps1.setString(1, UserID);
 			ps1.setString(2, user.getAccount());
 			ps1.setString(3, user.getPassword());
-			ps1.setString(4, user.getIdentityPic());
+			ps1.setString(4, user.getHeadImgUrl());
 			ps1.executeUpdate();
 			return true;
 		}catch (SQLException e) {

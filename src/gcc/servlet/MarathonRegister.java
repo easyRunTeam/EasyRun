@@ -30,12 +30,6 @@ import gcc.po.UserBean;
 import gcc.util.FaceAlignment;
 import gcc.util.MD5;
 
-@WebServlet(urlPatterns = "/MarathonRegister", initParams =
-{
-	@WebInitParam(name="retrytime", value="60"),
-	@WebInitParam(name="posibility", value="200"),
-	@WebInitParam(name="total", value="2")
-})
 public class MarathonRegister extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private List<String> filenames=new ArrayList<String>();

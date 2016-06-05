@@ -30,8 +30,9 @@
 <body>
 <%
 	Map<Integer, String> events=new HashMap<Integer, String>();
-	Map<Integer, String> event=(Map<Integer, String>)request.getAttribute("event");
+	Map<Integer, String> event=(Map<Integer, String>)session.getAttribute("event");
 	String userID = (String)session.getAttribute("userID"); 
+	System.out.append("marathonRegister2.jsp:"+userID);
 %>
 <section class="vbox">
     <header class="bg-white-only header header-md navbar navbar-fixed-top-xs">

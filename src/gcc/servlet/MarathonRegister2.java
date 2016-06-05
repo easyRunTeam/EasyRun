@@ -17,12 +17,7 @@ import javax.servlet.http.HttpSession;
 import gcc.po.EventBean;
 import gcc.dao.DaoBase;
 import gcc.dao.EventDao;
-@WebServlet(urlPatterns = "/MarathonRegister2", initParams =
-{
-	@WebInitParam(name="retrytime", value="60"),
-	@WebInitParam(name="posibility", value="200"),
-	@WebInitParam(name="total", value="2")
-})
+
 public class MarathonRegister2 extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	Connection conn;
@@ -36,7 +31,8 @@ public class MarathonRegister2 extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
 
-		String userID=(String)request.getAttribute("userID");
+		String userID=(String)request.getParameter("userID");
+		System.out.println(userID);
 		conn = DaoBase.getConnection(true);
 		EventDao eventdao=new EventDao(conn);
 		Map<Integer, String> event=new HashMap<Integer, String>();
@@ -62,8 +58,9 @@ public class MarathonRegister2 extends HttpServlet {
 			DaoBase.close(conn, null, null);
 		}
 
-		request.setAttribute("event", event);
-		request.setAttribute("userID", userID);
+		HttpSession session=request.getSession();
+		session.setAttribute("event", event);
+		session.setAttribute("userID", userID);
 		request.getRequestDispatcher("marathonRegister2.jsp").forward(request,response);
 	}
 

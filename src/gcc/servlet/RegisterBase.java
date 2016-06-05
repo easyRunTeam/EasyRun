@@ -39,7 +39,6 @@ public class RegisterBase extends HttpServlet{
         response.setCharacterEncoding("UTF-8");
         
         String filename = null;
-		String address = "";
 		//获得磁盘文件条目工厂  
         DiskFileItemFactory factory = new DiskFileItemFactory(); 
 
@@ -93,8 +92,7 @@ public class RegisterBase extends HttpServlet{
                     }
                     //给文件命名加MD5
                     MD5 md5 = new MD5();
-                    String time = Long.toString(System.currentTimeMillis());
-                    filename=md5.md5Encode(filename+time)+".jpg";
+                    filename=md5.md5Encode(filename)+".jpg";
                     System.out.println("New filename:"+filename);//filename包含后缀
                     File fileChild = new File(path,filename);
                     OutputStream out = new FileOutputStream(fileChild);  
@@ -110,16 +108,16 @@ public class RegisterBase extends HttpServlet{
                     out.close();
                 }
             }
-        	System.out.println("filename:"+filename);
-        	user.setIdentityPic(filename);
+        	System.out.println("file URL:"+filename);
+        	user.setHeadImgUrl(filename);
             
         }catch (FileUploadException e) {  
         	e.printStackTrace();  
-        	request.getRequestDispatcher("addInfoFailed.jsp").forward(request, response);
+        	//request.getRequestDispatcher("addInfoFailed.jsp").forward(request, response);
 	    }  
 	    catch (Exception e) {           
 	        e.printStackTrace();  
-	        request.getRequestDispatcher("addInfoFailed.jsp").forward(request, response);
+	        //request.getRequestDispatcher("addInfoFailed.jsp").forward(request, response);
 	    }
         //写入数据库
         Connection conn = DaoBase.getConnection(true);

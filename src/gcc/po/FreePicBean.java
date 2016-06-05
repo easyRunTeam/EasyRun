@@ -3,7 +3,7 @@ package gcc.po;
 public class FreePicBean
 {
 	private int eventID = -1;
-	private String wechatID = "";
+	private String userID = "";
 	private String picID = "";
 	private int downloadCnt = -1;
 	private long upTime = -1;
@@ -19,16 +19,6 @@ public class FreePicBean
 	public void setEventID(int eventID)
 	{
 		this.eventID = eventID;
-	}
-
-	public String getWechatID()
-	{
-		return wechatID;
-	}
-
-	public void setWechatID(String wechatID)
-	{
-		this.wechatID = wechatID;
 	}
 
 	public String getPicID()
@@ -83,6 +73,14 @@ public class FreePicBean
 
 	public void setHeadImgUrl(String headImgUrl) {
 		this.headImgUrl = headImgUrl;
+	}
+
+	public String getUserID() {
+		return userID;
+	}
+
+	public void setUserID(String userID) {
+		this.userID = userID;
 	}
 
 	

@@ -2,7 +2,7 @@
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
   <display-name>EasyRunServer</display-name>
   <welcome-file-list>
-    <welcome-file>marathonRegister.jsp</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
   </welcome-file-list>
   
   <servlet>
@@ -17,6 +17,39 @@
   </servlet-mapping>
   
   <servlet>
+    <servlet-name>MarathonRegister</servlet-name>
+    <servlet-class>
+			gcc.servlet.MarathonRegister
+		</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MarathonRegister</servlet-name>
+    <url-pattern>/MarathonRegister</url-pattern>
+  </servlet-mapping>
+  
+   <servlet>
+    <servlet-name>MarathonRegister2</servlet-name>
+    <servlet-class>
+			gcc.servlet.MarathonRegister2
+		</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MarathonRegister2</servlet-name>
+    <url-pattern>/MarathonRegister2</url-pattern>
+  </servlet-mapping>
+  
+     <servlet>
+    <servlet-name>MarathonRegister3</servlet-name>
+    <servlet-class>
+			gcc.servlet.MarathonRegister3
+		</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MarathonRegister3</servlet-name>
+    <url-pattern>/MarathonRegister3</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
     <servlet-name>RegisterBase</servlet-name>
     <servlet-class>
 			gcc.servlet.RegisterBase
@@ -26,4 +59,27 @@
     <servlet-name>RegisterBase</servlet-name>
     <url-pattern>/RegisterBase</url-pattern>
   </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>RegisterBase2</servlet-name>
+    <servlet-class>
+			gcc.servlet.RegisterBase2
+		</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>RegisterBase2</servlet-name>
+    <url-pattern>/RegisterBase2</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>FindFreePicture</servlet-name>
+    <servlet-class>
+			gcc.servlet.FindFreePicture
+		</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>FindFreePicture</servlet-name>
+    <url-pattern>/FindFreePicture</url-pattern>
+  </servlet-mapping>
+  
 </web-app>

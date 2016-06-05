@@ -24,12 +24,7 @@ import gcc.dao.AthleteDao;
 import gcc.dao.DaoBase;
 import gcc.dao.EventDao;
 import gcc.dao.UserDao;
-@WebServlet(urlPatterns = "/MarathonRegister3", initParams =
-{
-	@WebInitParam(name="retrytime", value="60"),
-	@WebInitParam(name="posibility", value="200"),
-	@WebInitParam(name="total", value="2")
-})
+
 public class MarathonRegister3 extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	Connection conn;
@@ -45,6 +40,7 @@ public class MarathonRegister3 extends HttpServlet {
 		System.out.println("eventID="+request.getParameter("eventID"));
 		int eventID = Integer.parseInt(request.getParameter("eventID"));
 		String userID = request.getParameter("user.userID");
+		System.out.println(userID);
 		Athlete athlete = new Athlete();
 		athlete.setEventID(eventID);
 		athlete.setState(State.origin);
@@ -59,6 +55,7 @@ public class MarathonRegister3 extends HttpServlet {
 			if (!athletedao.AddAthleteBase(athlete)){
 				System.out.println("报名失败");
 				UserBean user = new UserDao(conn).GetUser(userID);
+				System.out.println(user.getUserName());
 				HttpSession session = request.getSession();
 				session.setAttribute("user", user);//运动员注册时的信息
 				EventBean event = new  EventDao(conn).GetEventByID(eventID);

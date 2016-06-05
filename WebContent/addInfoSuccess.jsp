@@ -26,6 +26,7 @@
 <%
 
 UserBean user=(UserBean)session.getAttribute("user");
+System.out.println(user.getUserID());
 
 %>
 <body class="">
