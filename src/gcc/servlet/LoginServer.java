@@ -28,7 +28,7 @@ public class LoginServer extends HttpServlet{
     	request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
     	HttpSession session=request.getSession();
-    	String account= request.getParameter("username");
+    	String account= request.getParameter("account");
         String password= request.getParameter("password");
         
         System.out.println("account: " + account );

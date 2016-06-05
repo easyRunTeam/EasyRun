@@ -20,7 +20,7 @@ public class UserDao
 	
 	public UserBean GetUser(String userID) throws SQLException
 	{
-		final String sql1 = "select * from Users where userID=?";
+		final String sql1 = "select * from Users where UserID=?";
 		try (PreparedStatement ps1 = conn.prepareStatement(sql1))
 		{
 			ps1.setString(1, userID);
@@ -48,7 +48,6 @@ public class UserDao
 			return user;
 		}
 	}
-	
 	public UserBean findUser(String account, String password) throws SQLException
 	{
 		final String sql1 = "select * from Users where Account=? and Password=?";
@@ -63,7 +62,7 @@ public class UserDao
 			// get user
 			UserBean user = new UserBean();
 			user.setUserID(rs1.getString("UserID"));
-			user.setUserName(rs1.getString("HeadImgUrl"));
+			/*user.setUserName(rs1.getString("HeadImgUrl"));
 			user.setUserName(rs1.getString("RealName"));
 			user.setCelphone(rs1.getString("Celphone"));
 			user.setEmail(rs1.getString("Email"));
@@ -76,7 +75,7 @@ public class UserDao
 			user.setHeight(rs1.getFloat("Height"));
 			user.setWeight(rs1.getFloat("Weight"));
 			user.setUrgencyContact(rs1.getString("UrgencyContact"));
-			user.setUrgencyPhone(rs1.getString("UrgencyPhone"));
+			user.setUrgencyPhone(rs1.getString("UrgencyPhone"));*/
 			
 			return user;
 		}
@@ -122,6 +121,23 @@ public class UserDao
 			
 			ps1.executeUpdate();
 			return user;
+		}
+	}
+	
+	public boolean registerUpdate(UserBean user)
+	{//注册时详细信息写入数据库
+		final String sql1 = "update Users set UserName=?,Email=?"
+						  + " where Account=? and Password=?";
+		try (PreparedStatement ps1 = conn.prepareStatement(sql1))
+		{
+			ps1.setString(1, user.getUserName());
+			ps1.setString(2, user.getEmail());
+			ps1.setString(3, user.getAccount());
+			ps1.setString(4, user.getPassword());
+			ps1.executeUpdate();
+			return true;
+		}catch(SQLException e){
+			return false;
 		}
 	}
 }
