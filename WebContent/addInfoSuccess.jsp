@@ -26,7 +26,7 @@
 <%
 
 UserBean user=(UserBean)session.getAttribute("user");
-System.out.println(user.getUserID());
+System.out.println(user.getAccount());
 
 %>
 <body class="">
@@ -37,7 +37,7 @@ System.out.println(user.getUserID());
           <h1>完善信息成功</h1><br><br>
         </div>
         <div class="list-group auto m-b-sm m-b-lg">
-          <a href="MarathonRegister2?userID=<%=user.getUserID() %>" class="list-group-item">
+          <a href="MarathonRegister2?account=<%=user.getAccount() %>" class="list-group-item">
             <i class="fa fa-chevron-right icon-muted" ></i>
             <i class="fa fa-cloud" style="color:#d0d0d0"></i>&nbsp;&nbsp;&nbsp;赛事报名通道
           </a>

@@ -36,6 +36,18 @@ public class EventDao
 			return event;
 		}
 	}
+	public Integer findEventByName(String eventName) throws SQLException
+	{
+		final String sql1 = "select * from Events where eventName=?";
+		try (PreparedStatement ps1 = conn.prepareStatement(sql1))
+		{
+			ps1.setString(1, eventName);
+			ResultSet rs1 = ps1.executeQuery();
+			if (!rs1.next())// no match
+				return null;
+			return rs1.getInt("EventID");
+		}
+	}
 
 	public ArrayList<EventBean> GetEventByStatus(EventBean.Status eventStatus) throws SQLException
 	{
@@ -86,6 +98,7 @@ public class EventDao
 				EventBean event = new EventBean();
 				event.setEventID(rs1.getInt("EventID"));
 				event.setEventName(rs1.getString("EventName"));
+				//event.setEventStatus(rs1.getInt("EventStatus"));
 				events.add(event);
 			}
 			return events;

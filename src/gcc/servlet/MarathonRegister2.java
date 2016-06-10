@@ -31,8 +31,8 @@ public class MarathonRegister2 extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
 
-		String userID=(String)request.getParameter("userID");
-		System.out.println(userID);
+		String account=(String)request.getParameter("account");
+		System.out.println(account);
 		conn = DaoBase.getConnection(true);
 		EventDao eventdao=new EventDao(conn);
 		Map<Integer, String> event=new HashMap<Integer, String>();
@@ -60,7 +60,7 @@ public class MarathonRegister2 extends HttpServlet {
 
 		HttpSession session=request.getSession();
 		session.setAttribute("event", event);
-		session.setAttribute("userID", userID);
+		session.setAttribute("account", account);
 		request.getRequestDispatcher("marathonRegister2.jsp").forward(request,response);
 	}
 

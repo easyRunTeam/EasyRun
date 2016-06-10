@@ -1,5 +1,6 @@
 package gcc.po;
 
+
 public class EventBean
 {
 	public static enum Status
@@ -46,3 +47,4 @@ public class EventBean
 	}
 	
 }
+

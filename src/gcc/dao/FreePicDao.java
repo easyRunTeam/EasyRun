@@ -192,19 +192,25 @@ public class FreePicDao
 		}
 	}
 
-	public boolean AddPic(int eventID, String wechatID, String picID)
+	public boolean AddPic(int eventID, String UserID, String picID)
 			throws SQLException
 	{
-		final String sql1 = "insert into FreePics (EventID,WechatID,PicID,upTime) values(?,?,?,?)";
+		final String sql1 = "insert into FreePics (EventID,UserID,PicID,DownloadCnt,upTime) values(?,?,?,?,?)";
 		try (PreparedStatement ps1 = conn.prepareStatement(sql1))
 		{
 			ps1.setInt(1, eventID);
-			ps1.setString(2, wechatID);
+			ps1.setString(2, UserID);
 			ps1.setString(3, picID);
-			ps1.setLong(4, new Date().getTime());
+			ps1.setInt(4, 0);
+			ps1.setLong(5, new Date().getTime());
 
 			ps1.executeUpdate();
 			return true;
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			return false;
 		}
 	}
 }

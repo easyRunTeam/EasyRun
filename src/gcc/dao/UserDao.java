@@ -48,6 +48,40 @@ public class UserDao
 			return user;
 		}
 	}
+	
+	public UserBean GetUserbyAccount(String account) throws SQLException
+	{
+		final String sql1 = "select * from Users where Account=?";
+		try (PreparedStatement ps1 = conn.prepareStatement(sql1))
+		{
+			ps1.setString(1, account);
+			ResultSet rs1 = ps1.executeQuery();
+			if (!rs1.next())// no match
+				return null;
+
+			// get user
+			UserBean user = new UserBean();
+			user.setUserID(rs1.getString("userID"));
+			user.setHeadImgUrl(rs1.getString("HeadImgUrl"));
+			user.setUserName(rs1.getString("UserName"));
+			user.setAccount(rs1.getString("Account"));
+			user.setRealName(rs1.getString("RealName"));
+			user.setCelphone(rs1.getString("Celphone"));
+			user.setEmail(rs1.getString("Email"));
+			user.setBirth(rs1.getDate("Birth"));
+			user.setGender(rs1.getInt("Gender"));
+			user.setIdentityCard(rs1.getString("IdentityCard"));
+			user.setIdentityPic(rs1.getString("IdentityPic"));
+			user.setBloodType(rs1.getString("BloodType"));
+			user.setAddress(rs1.getString("Address"));
+			user.setHeight(rs1.getFloat("Height"));
+			user.setWeight(rs1.getFloat("Weight"));
+			user.setUrgencyContact(rs1.getString("UrgencyContact"));
+			user.setUrgencyPhone(rs1.getString("UrgencyPhone"));
+			
+			return user;
+		}
+	}
 	public UserBean findUser(String account, String password) throws SQLException
 	{
 		final String sql1 = "select * from Users where Account=? and Password=?";
@@ -80,6 +114,18 @@ public class UserDao
 			return user;
 		}
 	}
+	public String findUserByAccount(String account) throws SQLException
+	{
+		final String sql1 = "select * from Users where Account=?";
+		try (PreparedStatement ps1 = conn.prepareStatement(sql1))
+		{
+			ps1.setString(1, account);
+			ResultSet rs1 = ps1.executeQuery();
+			if (!rs1.next())// no match
+				return null;
+			return rs1.getString("UserID");
+		}
+	}
 
 	public boolean AddBaseUser(UserBean user)
 	{
@@ -99,11 +145,13 @@ public class UserDao
 		}
 	}
 	
+	
+	
 	public UserBean UpdUser(UserBean user) throws SQLException
 	{
 		final String sql1 = "update Users set UserName=?,Celphone=?,Email=?,IdentityCard=?,"
 				+ "IdentityPic=?,BloodType=?,Address=?,Height=?,Weight=?,UrgencyContact=?,UrgencyPhone=?"
-				+ " where UserID=?";
+				+ " where Account=?";
 		try (PreparedStatement ps1 = conn.prepareStatement(sql1))
 		{
 			ps1.setString(1, user.getUserName());
@@ -117,7 +165,7 @@ public class UserDao
 			ps1.setFloat(9, user.getWeight());
 			ps1.setString(10, user.getUrgencyContact());
 			ps1.setString(11, user.getUrgencyPhone());
-			ps1.setString(12, user.getUserID());
+			ps1.setString(12, user.getAccount());
 			
 			ps1.executeUpdate();
 			return user;

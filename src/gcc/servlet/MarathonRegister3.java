@@ -2,6 +2,7 @@ package gcc.servlet;
 
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -39,22 +40,34 @@ public class MarathonRegister3 extends HttpServlet {
 		response.setCharacterEncoding("UTF-8");
 		System.out.println("eventID="+request.getParameter("eventID"));
 		int eventID = Integer.parseInt(request.getParameter("eventID"));
-		String userID = request.getParameter("user.userID");
-		System.out.println(userID);
+		String account = request.getParameter("user.account");
+		System.out.println(account);
 		Athlete athlete = new Athlete();
 		athlete.setEventID(eventID);
 		athlete.setState(State.origin);
-		athlete.setUserID(userID);
+		
+		//athlete.setUserID(userID);
 		//request.setAttribute("eventID", eventID);
 		
 		Connection conn;
 		conn = DaoBase.getConnection(true);
+		UserDao userdao=new UserDao(conn);
+		UserBean user = null;
+		try {
+			user = userdao.GetUserbyAccount(account);
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		catch (Exception e){
+			e.printStackTrace();
+		}
+		athlete.setUserID(user.getUserID());
 		AthleteDao athletedao = new AthleteDao(conn);
 		try{
 			System.out.println("----运动员信息录入数据库----");
 			if (!athletedao.AddAthleteBase(athlete)){
 				System.out.println("报名失败");
-				UserBean user = new UserDao(conn).GetUser(userID);
 				System.out.println(user.getUserName());
 				HttpSession session = request.getSession();
 				session.setAttribute("user", user);//运动员注册时的信息
@@ -63,7 +76,6 @@ public class MarathonRegister3 extends HttpServlet {
 				request.getRequestDispatcher("athleteExistError.jsp").forward(request, response);
 			}else{
 				System.out.println("报名成功！");
-				UserBean user = new UserDao(conn).GetUser(userID);
 				request.setAttribute("user", user);//运动员注册时的信息
 				EventBean event = new  EventDao(conn).GetEventByID(eventID);
 				request.setAttribute("eventName", event.getEventName());//赛事名

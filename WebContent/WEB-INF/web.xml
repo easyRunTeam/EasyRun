@@ -82,4 +82,25 @@
     <url-pattern>/FindFreePicture</url-pattern>
   </servlet-mapping>
   
+    <servlet>
+    <servlet-name>UploadforUser1</servlet-name>
+    <servlet-class>
+			gcc.servlet.UploadforUser1
+		</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UploadforUser1</servlet-name>
+    <url-pattern>/UploadforUser1</url-pattern>
+  </servlet-mapping>
+  
+      <servlet>
+    <servlet-name>UploadforUser2</servlet-name>
+    <servlet-class>
+			gcc.servlet.UploadforUser2
+		</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UploadforUser2</servlet-name>
+    <url-pattern>/UploadforUser2</url-pattern>
+  </servlet-mapping>
 </web-app>

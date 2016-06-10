@@ -150,10 +150,10 @@ public class MarathonRegister extends HttpServlet {
                         System.out.println("item.value:"+value);
                         user.setUrgencyPhone(value);
                     }
-                    else if(name.equals("user.userID")){
+                    else if(name.equals("user.account")){
                     	System.out.println("item.name:"+name);
                         System.out.println("item.value:"+value);
-                        user.setUserID(value);
+                        user.setAccount(value);
                     }
                 }
                 else{

@@ -31,8 +31,8 @@
 <%
 	Map<Integer, String> events=new HashMap<Integer, String>();
 	Map<Integer, String> event=(Map<Integer, String>)session.getAttribute("event");
-	String userID = (String)session.getAttribute("userID"); 
-	System.out.append("marathonRegister2.jsp:"+userID);
+	String account = (String)session.getAttribute("account"); 
+	System.out.append("marathonRegister2.jsp:"+account);
 %>
 <section class="vbox">
     <header class="bg-white-only header header-md navbar navbar-fixed-top-xs">
@@ -88,8 +88,8 @@
 							</select> 
 					       </div>
 					       
-		                   <div style="display:none"><!-- 微信号，主键 -->
-								<input value="<%=userID%>" type="hidden" value="1" id="txt_width" name="user.userID"/>
+		                   <div style="display:none"><!-- 用户Account -->
+								<input value="<%=account%>" type="hidden" value="1" id="txt_width" name="user.account"/>
 							</div>
 							<div class="form-group">
 	                        <div class="checkbox i-checks">

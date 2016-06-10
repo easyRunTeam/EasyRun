@@ -25,8 +25,8 @@
 </head>
 <body onload="init();">
 <%
-	String userID = (String)request.getParameter("userID"); 
-System.out.println(userID);
+	String account = (String)request.getParameter("account"); 
+    System.out.println(account);
 %>
 <section class="vbox">
     <header class="bg-white-only header header-md navbar navbar-fixed-top-xs">
@@ -124,7 +124,7 @@ System.out.println(userID);
 								<input value="<%=user.getOpenId()%>" type="hidden" value="1" id="txt_width" name="user.wechatID"/>
 							</div> --%>
 							 <div style="display:none">
-								<input value="<%=userID%>" type="hidden" value="1" id="txt_width" name="user.userID"/>
+								<input value="<%=account%>" type="hidden" value="1" id="txt_width" name="user.account"/>
 							</div>
 							<div class="form-group">
 	                        <div class="checkbox i-checks">

@@ -34,7 +34,7 @@ UserBean user=(UserBean)session.getAttribute("user");
           <h1>完善信息失败</h1><br><br>
         </div>
         <div class="list-group auto m-b-sm m-b-lg">
-          <a href="marathonRegister.jsp?userID=<%=user.getUserID() %>" class="list-group-item">
+          <a href="marathonRegister.jsp?account=<%=user.getAccount()%>" class="list-group-item">
             <i class="fa fa-chevron-right icon-muted" ></i>
             <i class="fa fa-cloud" style="color:#d0d0d0"></i>&nbsp;&nbsp;&nbsp;重新完善
           </a>
