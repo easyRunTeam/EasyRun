@@ -164,7 +164,7 @@ public class FreePicDao
 	{
 		String account = user.getAccount();
 		String password = user.getPassword();
-		final String sql1 = "select EventName,DownloadCnt,upTime,UserName,HeadImgUrl from FreePics,Users,Events "
+		final String sql1 = "select EventName,DownloadCnt,upTime,UserName,HeadImgUrl, PicID from FreePics,Users,Events "
 				+ "where Account=? and Password=? "
 				+ "and FreePics.UserID = Users.UserID "
 				+ "and Events.EventID = FreePics.EventID "
@@ -185,6 +185,7 @@ public class FreePicDao
 				fp.setUpTime(rs1.getLong(3));
 				fp.setUserName(rs1.getString(4));
 				fp.setHeadImgUrl(rs1.getString(5));
+				fp.setPicID(rs1.getString(6));
 				pics.add(fp);
 			}
 

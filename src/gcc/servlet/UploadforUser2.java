@@ -71,7 +71,7 @@ public class UploadforUser2 extends HttpServlet{
         
         String basePath = request.getSession().getServletContext().getRealPath("/");
         System.out.println("ÏîÄ¿Â·¾¶= "+basePath);
-        String path = basePath+"UserIcon\\";
+        String path = basePath+"UserPic\\";
         //String path = "C:\\easyrun\\UserPicture\\";
         factory.setRepository(new File(path));  
         factory.setSizeThreshold(1024*1024); 
