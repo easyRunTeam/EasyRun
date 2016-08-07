@@ -40,7 +40,7 @@ public class MarathonRegister2 extends HttpServlet {
 		{
 			
 			ArrayList<EventBean> events = eventdao
-					.GetEventByStatus(EventBean.Status.ongoing);
+					.GetEventByStatus(0);
 
 			for (EventBean eb : events)
 			{

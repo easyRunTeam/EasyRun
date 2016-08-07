@@ -134,7 +134,7 @@ public class FreePicDao
 	public ArrayList<FreePicBean> GetFreePicsAll()//查找所有用户上传的照片
 			throws SQLException
 	{
-		final String sql1 = "select EventName,DownloadCnt,upTime,UserName,HeadImgUrl from FreePics,Users,Events "
+		final String sql1 = "select EventName,DownloadCnt,upTime,UserName,HeadImgUrl,FreePics.EventID, PicID from FreePics,Users,Events "
 				+ "where FreePics.UserID = Users.UserID "
 				+ "and Events.EventID = FreePics.EventID "
 				+ "order by upTime DESC";
@@ -152,6 +152,8 @@ public class FreePicDao
 				fp.setUpTime(rs1.getLong(3));
 				fp.setUserName(rs1.getString(4));
 				fp.setHeadImgUrl(rs1.getString(5));
+				fp.setEventID(rs1.getInt(6));
+				fp.setPicID(rs1.getString(7));
 				pics.add(fp);
 			}
 

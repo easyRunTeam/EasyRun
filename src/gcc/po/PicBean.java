@@ -4,15 +4,34 @@ import java.io.File;
 
 public class PicBean
 {
-	public static enum Status
-	{
-		onSale, hasBuy;
-	}
 	private File file;
 	private String picID;
 	private String author = "";
 	private int Price = 0;
-	private Status picStatus;
+	private int picStatus;
+	private String userID;
+	private long upTime;
+	private String eventID;
+	private String userName = "";
+	private String eventName = "";
+	private String headImgUrl =""; // 用户头像链接
+	public long getUpTime() {
+		return upTime;
+	}
+
+	public void setUpTime(long upTime) {
+		this.upTime = upTime;
+	}
+
+	public String getUserID() {
+		return userID;
+	}
+
+	public void setUserID(String userID) {
+		this.userID = userID;
+	}
+
+	
 
 	public File getFile()
 	{
@@ -54,18 +73,47 @@ public class PicBean
 		Price = price;
 	}
 
-	public Status getPicStatus()
+	public int getPicStatus()
 	{
 		return picStatus;
 	}
 
-	public void setPicStatus(Status picStatus)
+	public void setPicStatus(int picStatus)
 	{
 		this.picStatus = picStatus;
 	}
 
-	public void setPicStatus(int picStatus)
-	{
-		this.picStatus = Status.values()[picStatus];
+	public String getEventID() {
+		return eventID;
 	}
+
+	public void setEventID(String eventID) {
+		this.eventID = eventID;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	public String getEventName() {
+		return eventName;
+	}
+
+	public void setEventName(String eventName) {
+		this.eventName = eventName;
+	}
+
+	public String getHeadImgUrl() {
+		return headImgUrl;
+	}
+
+	public void setHeadImgUrl(String headImgUrl) {
+		this.headImgUrl = headImgUrl;
+	}
+
+
 }

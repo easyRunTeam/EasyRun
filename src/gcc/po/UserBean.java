@@ -4,10 +4,6 @@ import java.sql.Date;
 
 public class UserBean
 {
-	public static enum Gender
-	{
-		male,female;
-	}
 	private String userID = "";
 	private String headImgUrl =""; 	// 用户头像链接
 	private String userName = "";	//昵称
@@ -16,8 +12,7 @@ public class UserBean
 	private String realName = "";	//真实姓名
 	private String celphone = "";
 	private String email = "";
-	private Date birth;
-	private Gender gender;
+	private int gender;
 	private String identityCard = "";	//身份证号
 	private String identityPic = "";	//身份证上传图的存储路径
 	private String bloodType = "";		//血型
@@ -26,8 +21,24 @@ public class UserBean
 	private float weight;				//体重
 	private String urgencyContact = ""; //紧急联系人姓名
 	private String urgencyPhone = "";	//紧急联系人电话
+	private int whose;
+	private int money;
+	private String jifen="1000";//商城积分
+
 	
 	
+	public String getJifen() {
+		return jifen;
+	}
+	public void setJifen(String jifen) {
+		this.jifen = jifen;
+	}
+	public int getWhose() {
+		return whose;
+	}
+	public void setWhose(int whose) {
+		this.whose = whose;
+	}
 	public String getEmail()
 	{
 		return email;
@@ -36,21 +47,13 @@ public class UserBean
 	{
 		this.email = email;
 	}
-	public Date getBirth()
-	{
-		return birth;
-	}
-	public void setBirth(Date birth)
-	{
-		this.birth = birth;
-	}
-	public Gender getGender()
+	public int getGender()
 	{
 		return gender;
 	}
 	public void setGender(int gender)
 	{
-		this.gender = Gender.values()[gender];
+		this.gender =gender;
 	}
 	public String getUserName()
 	{
@@ -116,9 +119,13 @@ public class UserBean
 	public void setUrgencyPhone(String urgencyPhone) {
 		this.urgencyPhone = urgencyPhone;
 	}
-	public void setGender(Gender gender) {
-		this.gender = gender;
+	public int getMoney() {
+		return money;
 	}
+	public void setMoney(int money) {
+		this.money = money;
+	}
+
 	public String getHeadImgUrl() {
 		return headImgUrl;
 	}

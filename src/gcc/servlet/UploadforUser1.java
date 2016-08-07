@@ -18,7 +18,6 @@ import gcc.dao.EventDao;
 import gcc.dao.FreePicDao;
 import gcc.dao.UserDao;
 import gcc.po.EventBean;
-import gcc.po.EventBean.Status;
 import gcc.po.FreePicBean;
 import gcc.po.UserBean;
 import net.sf.json.JSONArray;
@@ -100,7 +99,7 @@ public class UploadforUser1 extends HttpServlet {
 	    	EventBean f = new EventBean();
 	    	f.setEventID(1);
 	    	f.setEventName("gcc");
-	    	f.setEventStatus(Status.ongoing.ordinal());
+	    	//f.setEventStatus(Status.ongoing.ordinal());
 	    	
 	    	for(int i=0;i<2;i++){
 	    		freePicList.add(f);

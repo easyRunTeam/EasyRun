@@ -39,9 +39,11 @@ public class FindFreePicture extends HttpServlet{
         Connection conn = DaoBase.getConnection(true);
         FreePicDao freePicDao = new FreePicDao(conn);
         try {
-        	ArrayList<FreePicBean> freePicList= freePicDao.GetFreePicsByUser(user);
+        	ArrayList<FreePicBean> freePicList= freePicDao.GetFreePicsAll();
+        	System.out.println("--findFreePic---");
 			if(freePicList!=null){
 				JSONArray jsonArray = JSONArray.fromObject(freePicList);
+				System.out.println(jsonArray);
 				response.getOutputStream().write(jsonArray.toString().getBytes());
 			}
 			else{
@@ -66,20 +68,14 @@ public class FindFreePicture extends HttpServlet{
         Connection conn = DaoBase.getConnection(true);
         FreePicDao freePicDao = new FreePicDao(conn);
         try {
-        	ArrayList<FreePicBean> freePicList= freePicDao.GetFreePicsByUser(user);
+        	ArrayList<FreePicBean> freePicList= freePicDao.GetFreePicsAll();
+        	System.out.println("--findFreePic---");
 			if(freePicList!=null){
-				for(int i=0;i<freePicList.size();i++)
-				{
-					Long uptime=freePicList.get(i).getUpTime();
-					SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-					Date date = new Date(uptime);
-					System.out.println(sdf.format(date));
-				}
 				JSONArray jsonArray = JSONArray.fromObject(freePicList);
+				System.out.println(jsonArray);
 				response.getOutputStream().write(jsonArray.toString().getBytes());
 			}
 			else{
-				
 				response.getOutputStream().write("failed".getBytes());
 			}
 		} catch (SQLException e) {

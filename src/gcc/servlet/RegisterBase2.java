@@ -39,10 +39,19 @@ public class RegisterBase2 extends HttpServlet{
         
         System.out.println("username: " + account );
         System.out.println("email: " + password );
-        
+        Boolean result = false;
         Connection conn = DaoBase.getConnection(true);
         UserDao userDao = new UserDao(conn);
-        boolean result = userDao.registerUpdate(user);
+        try{
+        	result = userDao.registerUpdate(user);
+        }
+        catch(Exception e)
+        {
+        	e.printStackTrace();
+        }
+        finally{
+        	DaoBase.close(conn, null, null);
+        }
 		if(result){
 			System.out.println("succeed");
 			response.getOutputStream().write("succeed".getBytes());
@@ -51,5 +60,6 @@ public class RegisterBase2 extends HttpServlet{
 			System.out.println("failed");
 			response.getOutputStream().write("failed".getBytes());
 		}
+        	
     }
 }

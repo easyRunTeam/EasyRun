@@ -66,10 +66,11 @@ public class UploadforUser2 extends HttpServlet{
 		String filename = null;
 		boolean result=false;
 		int eventID;
+		 Connection conn = DaoBase.getConnection(true);
 		//获得磁盘文件条目工厂  
         DiskFileItemFactory factory = new DiskFileItemFactory(); 
         
-        String basePath = request.getSession().getServletContext().getRealPath("/");
+        String basePath = "C:\\TomcatProject\\";
         System.out.println("项目路径= "+basePath);
         String path = basePath+"UserPic\\";
         //String path = "C:\\easyrun\\UserPicture\\";
@@ -100,7 +101,6 @@ public class UploadforUser2 extends HttpServlet{
                         System.out.println("item.value:"+value);
                         eventName = value;
                     	//request.setAttribute("eventID", value);
-                    	path += value+"\\";
                     }
                 }  
             }
@@ -127,8 +127,12 @@ public class UploadforUser2 extends HttpServlet{
                     MD5 md5 = new MD5();
                     String time = Long.toString(System.currentTimeMillis());
                     filename=md5.md5Encode(filename+time)+".jpg";
+                    EventDao eventdao=new EventDao(conn);
+                    int EventID=eventdao.findEventByName(eventName);
+                    path+=EventID+"//";
                     System.out.println("New filename:"+filename);//filename包含后缀
                     File fileChild = new File(path,filename);
+                    filename=path+filename;
                     OutputStream out = new FileOutputStream(fileChild);  
                     InputStream in = item.getInputStream();  
                     int length = 0 ;  
@@ -149,14 +153,14 @@ public class UploadforUser2 extends HttpServlet{
 	        e.printStackTrace();  
 	    }
         //写入数据库
-        Connection conn = DaoBase.getConnection(true);
+       
         EventDao edao=new EventDao(conn);
         FreePicDao fpdao = new FreePicDao(conn);
         UserDao uDao=new UserDao(conn);
         try {
         	String UserID=uDao.findUserByAccount(account);
         	eventID=edao.findEventByName(eventName);
-			result=fpdao.AddPic(eventID, UserID,filename);
+			result=fpdao.AddPic(eventID, UserID,"http://120.27.106.188:8088//UserPic//"+eventID+"//"+filename);
 		} catch (NumberFormatException e) {
 			
 			e.printStackTrace();

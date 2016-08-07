@@ -8,23 +8,26 @@ public class ConfirmData {
 	private String phone = "";
 	private String urgencyName = "";
 	private String urgencyPhone = "";
-	private String IdentityPic = "";
+	private String identityPic = "";
 	private String userID ="";
 	private Integer athleteID=null;
 	
 	public ConfirmData(String name,String eventName,String IDcard,
 			String phone,String urgencyName,String urgencyPhone,
-			String IdentityPic,String userID,int eventID,int athleteID){
+			String identityPic,String userID,int eventID,int athleteID){
 		this.name=name;
 		this.eventName=eventName;
 		this.IDcard=IDcard;
 		this.phone=phone;
 		this.urgencyName=urgencyName;
 		this.urgencyPhone=urgencyPhone;
-		this.IdentityPic=IdentityPic;
+		this.identityPic=identityPic;
 		this.setUserID(userID);
 		this.eventID=eventID;
 		this.athleteID=athleteID;
+	}	
+	public ConfirmData(){
+		
 	}
 	
 	public String getName() {
@@ -65,11 +68,11 @@ public class ConfirmData {
 	}
 
 	public String getIdentityPic() {
-		return IdentityPic;
+		return identityPic;
 	}
 
 	public void setIdentityPic(String identityPic) {
-		IdentityPic = identityPic;
+		this.identityPic = identityPic;
 	}
 
 	public String getUserID() {

@@ -66,12 +66,13 @@ public class MarathonRegister extends HttpServlet {
 		UserBean user = new UserBean();
 		String filename = null;
 		String address = "";
+		String path1="";
 		//获得磁盘文件条目工厂  
         DiskFileItemFactory factory = new DiskFileItemFactory(); 
 
-        String basePath = request.getSession().getServletContext().getRealPath("/");
+        String basePath = "C:\\TomcatProject\\";
         System.out.println("项目路径= "+basePath);
-        String path = basePath+"UserPicture\\UserInfo\\";
+        String path = basePath+"Athlete\\pic\\";
         
         factory.setRepository(new File(path));  
         factory.setSizeThreshold(1024*1024); 
@@ -189,8 +190,8 @@ public class MarathonRegister extends HttpServlet {
                     }
                     in.close();  
                     out.close();
-                    String path1=path+filename;
-                    String path2="C:\\ProgramData\\UserIcon\\"+JPG;
+                    path1=path+filename;
+                    String path2=basePath+"Athlete\\cutface\\"+JPG;
                     System.out.println(path1);
                     System.out.println(path2);
                     FaceAlignment ni = new FaceAlignment();
@@ -207,7 +208,7 @@ public class MarathonRegister extends HttpServlet {
                 }
             }
         	System.out.println("filename:"+filename);
-        	user.setIdentityPic(filename);
+        	user.setIdentityPic("http://120.27.106.188:8088//Athlete//pic//"+filename);
         	user.setAddress(address);
         	System.out.println("address: "+address);
         	HttpSession session=request.getSession();
@@ -236,15 +237,19 @@ public class MarathonRegister extends HttpServlet {
 			request.getRequestDispatcher("addInfoFailed.jsp").forward(request, response);
 			e.printStackTrace();
 		}
+
         catch (NumberFormatException e) {
         	HttpSession session=request.getSession();
         	session.setAttribute("user", user);//运动员注册时的信息
 			request.getRequestDispatcher("addInfoFailed.jsp").forward(request, response);
 			e.printStackTrace();
 		}
+        finally{
+        	DaoBase.close(conn, null, null);
+        }
         System.out.println("Afterdatabase");
         System.out.println("信息完善成功！");
-		DaoBase.close(conn, null, null);
+		
         request.getRequestDispatcher("addInfoSuccess.jsp").forward(request, response);
 	}
 }

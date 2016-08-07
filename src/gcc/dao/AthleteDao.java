@@ -104,7 +104,7 @@ public class AthleteDao {
 
 	public ArrayList<ConfirmData> GetsomeAthletes() {
 		final String SQL = "select UserName, EventName, IdentityCard, Celphone, UrgencyContact,UrgencyPhone,IdentityPic,Athletes.UserID,Athletes.EventID,Athletes.AthleteID from Athletes, Users, Events"
-				+ " where Athletes.state=1 and Athletes.UserID=Users.UserID and Events.EventID=Athletes.EventID";
+				+ " where Athletes.state=1 and Athletes.UserID=Users.UserID and Events.EventID=Athletes.EventID and Users.whose=0";
 		ArrayList<ConfirmData> dataList = new ArrayList<ConfirmData>();
 		try (PreparedStatement ps1 = conn.prepareStatement(SQL)) {
 			ResultSet rs1;
@@ -160,24 +160,15 @@ public class AthleteDao {
 		}
 	}
 	public ConfirmData GetAthlete(int aID,int eventID) {
-		final String SQL = "select UserName, EventName, IdentityCard, Celphone, UrgencyContact,UrgencyPhone,IdentityPic,Athletes.UserID,Athletes.EventID,Athletes.AthleteID from Athletes, Users, Events"
-				+ "where Athletes.eventID="+eventID+" and Athletes.AthleteID="+aID+" and Athletes.UserID=Users.UserID and Events.EventID=Athletes.EventID";
+		final String SQL = "select UserName, EventName, IdentityCard, Celphone, UrgencyContact,UrgencyPhone,IdentityPic,Athletes.UserID,Athletes.EventID,Athletes.AthleteID from Athletes, Users, Events "
+				+ " where Athletes.eventID="+eventID+" and Athletes.AthleteID="+aID+" and Athletes.UserID=Users.UserID and Events.EventID=Athletes.EventID";
 		//ConfirmData confirmData=new ConfirmData(SQL, SQL, SQL, SQL, SQL, SQL, SQL, SQL, aID,aID);
 		try (PreparedStatement ps1 = conn.prepareStatement(SQL)) {
 			ResultSet rs1;
 			rs1 = ps1.executeQuery();
 			if (rs1.next()) {
-				String name = rs1.getString(1);
-				String eventName = rs1.getString(2);
-				String IDcard = rs1.getString(3);
-				String celphone = rs1.getString(4);
-				String urgencyName = rs1.getString(5);
-				String urgencyPhone = rs1.getString(6);
-				String IdentityPic = rs1.getString(7);
-				String userID = rs1.getString(8);
-				int athleteID=rs1.getInt(10);
-				ConfirmData confirmData = new ConfirmData(name, eventName, IDcard, celphone, urgencyName, urgencyPhone,
-						IdentityPic, userID, eventID,athleteID);
+				ConfirmData confirmData = new ConfirmData(rs1.getString(1), rs1.getString(2), rs1.getString(3), rs1.getString(4), rs1.getString(5), rs1.getString(6),
+						rs1.getString(7), rs1.getString(8), eventID,rs1.getInt(10));
 				//dataList.add(confirmData);
 				return confirmData;
 			}

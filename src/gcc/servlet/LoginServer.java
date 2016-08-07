@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 import gcc.dao.DaoBase;
 import gcc.dao.UserDao;
 import gcc.po.UserBean;
+import net.sf.json.JSONArray;
 
 /**
  * @author ธ๐ดิดิ
@@ -27,18 +28,23 @@ public class LoginServer extends HttpServlet{
     	HttpSession session=request.getSession();
     	String account= request.getParameter("account");
         String password= request.getParameter("password");
-        
+        String who=request.getParameter("who");
+        int identity=Integer.parseInt(who);
         System.out.println("account: " + account );
         System.out.println("password: " + password );
+        System.out.println("who: "+who);
         Connection conn = DaoBase.getConnection(true);
         UserDao userDao = new UserDao(conn);
         try {
-        	UserBean user = userDao.findUser(account,password);
+        	UserBean user = userDao.findUser(account,password,identity);
 			if(user!=null){
 				//System.out.println("user account"+user.getAccount());
 	        	//System.out.println("user password"+user.getPassword());
+				JSONArray jsonArray = JSONArray.fromObject(user);
 				session.setAttribute("user", user);
-				response.getOutputStream().write("succeed".getBytes());
+				System.out.println(jsonArray);
+				response.getOutputStream().write(jsonArray.toString().getBytes());
+				
 			}
 			else{
 				//System.out.println("failed");
@@ -48,6 +54,10 @@ public class LoginServer extends HttpServlet{
 			e.printStackTrace();
 			response.getOutputStream().write("failed".getBytes());
 		}
+        finally
+        {
+        	DaoBase.close(conn, null, null);
+        }
     
     	
     }
@@ -58,26 +68,31 @@ public class LoginServer extends HttpServlet{
     	HttpSession session=request.getSession();
     	String account= request.getParameter("account");
         String password= request.getParameter("password");
-        
+        String who=request.getParameter("who");
+        int whose=Integer.parseInt(who);
         System.out.println("account: " + account );
         System.out.println("password: " + password );
+        System.out.println("who:"+whose);
         Connection conn = DaoBase.getConnection(true);
         UserDao userDao = new UserDao(conn);
         try {
-        	UserBean user = userDao.findUser(account,password);
+        	UserBean user = userDao.findUser(account,password,whose);
 			if(user!=null){
-				//System.out.println("user account"+user.getAccount());
-	        	//System.out.println("user password"+user.getPassword());
+				JSONArray jsonArray = JSONArray.fromObject(user);
 				session.setAttribute("user", user);
-				response.getOutputStream().write("succeed".getBytes());
+				System.out.println(jsonArray);
+				response.getOutputStream().write(jsonArray.toString().getBytes());
+				
 			}
 			else{
-				//System.out.println("failed");
 				response.getOutputStream().write("failed".getBytes());
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 			response.getOutputStream().write("failed".getBytes());
 		}
+        finally{
+        	DaoBase.close(conn, null, null);
+        }
     }
 }

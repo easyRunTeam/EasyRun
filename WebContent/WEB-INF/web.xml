@@ -103,4 +103,95 @@
     <servlet-name>UploadforUser2</servlet-name>
     <url-pattern>/UploadforUser2</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>UploadShopPic</servlet-name>
+    <servlet-class>
+			gcc.servlet.UploadShopPic
+		</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UploadShopPic</servlet-name>
+    <url-pattern>/UploadShopPic</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>GetClothesPageResource</servlet-name>
+    <servlet-class>
+			gcc.servlet.GetClothesPageResource
+		</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetClothesPageResource</servlet-name>
+    <url-pattern>/GetClothesPageResource</url-pattern>
+  </servlet-mapping>
+  
+    <servlet>
+    <servlet-name>UploadforMaster</servlet-name>
+    <servlet-class>
+			gcc.servlet.UploadforMaster
+		</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UploadforMaster</servlet-name>
+    <url-pattern>/UploadforMaster</url-pattern>
+  </servlet-mapping>
+  
+      <servlet>
+    <servlet-name>FindPicture</servlet-name>
+    <servlet-class>
+			gcc.servlet.FindPicture
+		</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>FindPicture</servlet-name>
+    <url-pattern>/FindPicture</url-pattern>
+  </servlet-mapping>
+  
+        <servlet>
+    <servlet-name>MoneyEnough</servlet-name>
+    <servlet-class>
+			gcc.servlet.MoneyEnough
+		</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MoneyEnough</servlet-name>
+    <url-pattern>/MoneyEnough</url-pattern>
+  </servlet-mapping>
+  
+          <servlet>
+    <servlet-name>BuyPicture</servlet-name>
+    <servlet-class>
+			gcc.servlet.BuyPicture
+		</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>BuyPicture</servlet-name>
+    <url-pattern>/BuyPicture</url-pattern>
+  </servlet-mapping>
+  
+            <servlet>
+    <servlet-name>GetEventPageResource</servlet-name>
+    <servlet-class>
+			gcc.servlet.GetEventPageResource
+		</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetEventPageResource</servlet-name>
+    <url-pattern>/GetEventPageResource</url-pattern>
+  </servlet-mapping>
+  
+  
+            <servlet>
+    <servlet-name>GetEventPageResourceRegistered</servlet-name>
+    <servlet-class>
+			gcc.servlet.GetEventPageResourceRegistered
+		</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetEventPageResourceRegistered</servlet-name>
+    <url-pattern>/GetEventPageResourceRegistered</url-pattern>
+  </servlet-mapping>
+  
+  
+
 </web-app>

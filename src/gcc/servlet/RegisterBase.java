@@ -8,6 +8,7 @@ import java.io.OutputStream;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.UUID;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -42,7 +43,7 @@ public class RegisterBase extends HttpServlet{
 		//获得磁盘文件条目工厂  
         DiskFileItemFactory factory = new DiskFileItemFactory(); 
 
-        String basePath = request.getSession().getServletContext().getRealPath("/");
+        String basePath = "C:\\TomcatProject\\";
         System.out.println("项目路径= "+basePath);
         String path = basePath+"UserIcon\\";
         
@@ -68,11 +69,18 @@ public class RegisterBase extends HttpServlet{
                     	System.out.println("item.name:"+name);
                         System.out.println("item.value:"+value);
                         user.setAccount(value);
+                        System.out.println("account"+value);
                     }
                     else if(name.equals("password")){
                     	System.out.println("item.name:"+name);
                         System.out.println("item.value:"+value);
                         user.setPassword(value);
+                    }
+                    else if(name.equals("who"))
+                    {
+                    	System.out.println("item.name:"+name);
+                        System.out.println("item.value:"+value);
+                        user.setWhose(Integer.parseInt(value));
                     }
                 }
                 else{
@@ -90,9 +98,9 @@ public class RegisterBase extends HttpServlet{
                     {       
                         fileParent.mkdirs();
                     }
-                    //给文件命名加MD5
-                    MD5 md5 = new MD5();
-                    filename=md5.md5Encode(filename)+".jpg";
+                    String UserID = UUID.randomUUID().toString();//长度为36位的字符串
+                    filename=UserID+".jpg";
+                    user.setUserID(UserID);
                     System.out.println("New filename:"+filename);//filename包含后缀
                     File fileChild = new File(path,filename);
                     OutputStream out = new FileOutputStream(fileChild);  
@@ -108,26 +116,39 @@ public class RegisterBase extends HttpServlet{
                     out.close();
                 }
             }
-        	System.out.println("file URL:"+filename);
-        	user.setHeadImgUrl(filename);
+        	user.setHeadImgUrl("http://120.27.106.188:8088/UserIcon"+filename);
             
         }catch (FileUploadException e) {  
         	e.printStackTrace();  
-        	//request.getRequestDispatcher("addInfoFailed.jsp").forward(request, response);
 	    }  
 	    catch (Exception e) {           
 	        e.printStackTrace();  
-	        //request.getRequestDispatcher("addInfoFailed.jsp").forward(request, response);
 	    }
-        //写入数据库
+        //写入数据库 
         Connection conn = DaoBase.getConnection(true);
         UserDao userDao = new UserDao(conn);
-        boolean result = userDao.AddBaseUser(user);
-		if(result){	//新用户添加成功
-			response.getOutputStream().write("succeed".getBytes());
+        
+        String userID=null;
+        try {
+			userID=userDao.findUserByAccount(user.getAccount());
+			 if(userID!=null)
+		        {
+		        	response.getOutputStream().write("failed".getBytes());
+		        }
+		        boolean result = userDao.AddBaseUser(user);
+				if(result){	//新用户添加成功
+					response.getOutputStream().write("succeed".getBytes());
+				}
+				else{	//新用户添加失败
+					response.getOutputStream().write("failed".getBytes());
+				}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		else{	//新用户添加失败
-			response.getOutputStream().write("failed".getBytes());
-		}
+        finally{
+        	DaoBase.close(conn, null, null);
+        }
+       
     }
 }
